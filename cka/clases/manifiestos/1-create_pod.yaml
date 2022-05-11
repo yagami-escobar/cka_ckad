@@ -1,0 +1,18 @@
+# Creación de 1 Pod montando un Volume 
+apiVersion: v1  # Versión del Api que se quiere utilizar.
+kind: Pod # El tipo de recuso a crear.
+metadata: # Datos propios del Pod
+  name: p_redis1
+  namespace: default
+  labels:
+    app: pod_test1
+spec:   # Son las especificaciones del estado deseado que queremos que tenga el Pod.
+  containers: # Etiqueta para configurar los containers del Pod
+  - name: redis1 # Nombre del Pod
+    image: redis  # Imagen a usar
+    volumeMounts: # Montamos un Volume
+    - name: redis-storage # Name del Volume
+      mountPath: /data/redis # Path del Montaje dentro del Pod
+  volumes: # Especificaciones del Volume 
+  - name: redis-storage # Name del Volume
+  emptyDir: {} # Tipo de Volume EmptyDir
